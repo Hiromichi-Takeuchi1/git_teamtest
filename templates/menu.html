@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>メニュー</title>
+</head>
+<body>
+    <h1>メニュー</h1>
+    <ul>
+        {% for item in menu.values() %}
+        <li>{{ item.name }}：{{ item.price }}円</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
