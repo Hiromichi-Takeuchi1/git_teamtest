@@ -6,9 +6,30 @@
 </head>
 <body>
     <h1>メニュー</h1>
+    <h2>ドリンク</h2>
     <ul>
-        {% for item in menu.values() %}
-        <li>{{ item.name }}：{{ item.price }}円</li>
+        {% for item_code, item in menu.items() %}
+            {% if item_code[0] == "D" %}
+            <li>{{ item.name }}：{{ item.price }}円</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <h2>フード</h2>
+    <ul>
+        {% for item_code, item in menu.items() %}
+            {% if item_code[0] == "F" %}
+            <li>{{ item.name }}：{{ item.price }}円</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <h2>デザート</h2>
+    <ul>
+        {% for item_code, item in menu.items() %}
+            {% if item_code[0] == "S" %}
+            <li>{{ item.name }}：{{ item.price }}円</li>
+            {% endif %}
         {% endfor %}
     </ul>
 </body>
