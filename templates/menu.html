@@ -14,6 +14,10 @@
             width: 180px;
         }
 
+        .menu-item form {
+            margin: 0;
+        }
+
         .item-price {
             width: 70px;
         }
@@ -21,6 +25,7 @@
 </head>
 <body>
     <h1>メニュー</h1>
+    <p><a href="/cart">カートを見る</a></p>
     <h2>ドリンク</h2>
     <ul>
         {% for item_code, item in menu.items() %}
@@ -28,7 +33,10 @@
             <li class="menu-item">
                 <span class="item-name">{{ item.name }}</span>
                 <span class="item-price">{{ item.price }}円</span>
-                <button type="button">カートに入れる</button>
+                <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ item_code }}">
+                    <button>カートに入れる</button>
+                </form>
             </li>
             {% endif %}
         {% endfor %}
@@ -41,7 +49,10 @@
             <li class="menu-item">
                 <span class="item-name">{{ item.name }}</span>
                 <span class="item-price">{{ item.price }}円</span>
-                <button type="button">カートに入れる</button>
+                <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ item_code }}">
+                    <button>カートに入れる</button>
+                </form>
             </li>
             {% endif %}
         {% endfor %}
@@ -54,7 +65,10 @@
             <li class="menu-item">
                 <span class="item-name">{{ item.name }}</span>
                 <span class="item-price">{{ item.price }}円</span>
-                <button type="button">カートに入れる</button>
+                <form method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ item_code }}">
+                    <button>カートに入れる</button>
+                </form>
             </li>
             {% endif %}
         {% endfor %}
