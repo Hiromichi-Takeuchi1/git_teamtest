@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from data import ORDERS
 
 app = Flask(__name__)
 
@@ -24,6 +25,11 @@ menu = {
 @app.route("/menu")
 def show_menu():
     return render_template("menu.html", menu=menu)
+
+
+@app.route("/staff")
+def show_staff():
+    return render_template("staff.html", orders=ORDERS)
 
 
 # ---- B(八木) カート・注文の窓口をつなぐ。ここは3行だけ ----
