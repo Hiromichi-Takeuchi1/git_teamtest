@@ -17,10 +17,20 @@
         .item-price {
             width: 70px;
         }
+
+        .cart-link {
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .cart-form {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
     <h1>メニュー</h1>
+    <a class="cart-link" href="/cart">カートを見る</a>
     <h2>ドリンク</h2>
     <ul>
         {% for item_code, item in menu.items() %}
@@ -28,7 +38,10 @@
             <li class="menu-item">
                 <span class="item-name">{{ item.name }}</span>
                 <span class="item-price">{{ item.price }}円</span>
-                <button type="button">カートに入れる</button>
+                <form class="cart-form" method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ item_code }}">
+                    <button type="submit">カートに入れる</button>
+                </form>
             </li>
             {% endif %}
         {% endfor %}
@@ -41,7 +54,10 @@
             <li class="menu-item">
                 <span class="item-name">{{ item.name }}</span>
                 <span class="item-price">{{ item.price }}円</span>
-                <button type="button">カートに入れる</button>
+                <form class="cart-form" method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ item_code }}">
+                    <button type="submit">カートに入れる</button>
+                </form>
             </li>
             {% endif %}
         {% endfor %}
@@ -54,7 +70,10 @@
             <li class="menu-item">
                 <span class="item-name">{{ item.name }}</span>
                 <span class="item-price">{{ item.price }}円</span>
-                <button type="button">カートに入れる</button>
+                <form class="cart-form" method="post" action="/cart/add">
+                    <input type="hidden" name="id" value="{{ item_code }}">
+                    <button type="submit">カートに入れる</button>
+                </form>
             </li>
             {% endif %}
         {% endfor %}
