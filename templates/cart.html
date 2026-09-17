@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カート</title>
+    <style>
+        body { font-family: sans-serif; max-width: 700px; margin: 0 auto; padding: 16px; line-height: 1.7; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border-bottom: 1px solid #ddd; padding: 6px 8px; text-align: left; }
+        td.num { text-align: right; }
+        form { display: inline; }
+        button { padding: 4px 10px; cursor: pointer; }
+        .order { padding: 10px 24px; font-size: 1.1em; background: #6b4f3a; color: #fff; border: none; }
+        .message { background: #fff5d6; padding: 8px 12px; border-radius: 6px; }
+        nav a { margin-right: 12px; }
+    </style>
+</head>
+<body>
+    <nav><a href="/menu">メニュー</a><a href="/cart">カート</a></nav>
+    <h1>カート</h1>
+
+    {% if message %}<p class="message">{{ message }}</p>{% endif %}
+
+    {% if rows %}
+    <table>
+        <tr><th>商品</th><th>単価</th><th>数</th><th>小計</th><th></th></tr>
+        {% for r in rows %}
+        <tr>
+            <td>{{ r.name }}</td>
+            <td class="num">{{ r.price }}円</td>
+            <td class="num">
+                <form method="post" action="/cart/change">
+                    <input type="hidden" name="id" value="{{ r.id }}">
+                    <input type="hidden" name="delta" value="-1">
+                    <button>−</button>
+                </form>
+                {{ r.qty }}
+                <form method="post" action="/cart/change">
+                    <input type="hidden" name="id" value="{{ r.id }}">
+                    <input type="hidden" name="delta" value="1">
+                    <button>＋</button>
+                </form>
+            </td>
+            <td class="num">{{ r.subtotal }}円</td>
+            <td>
+                <form method="post" action="/cart/remove">
+                    <input type="hidden" name="id" value="{{ r.id }}">
+                    <button>削除</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr><th colspan="3">合計</th><th class="num">{{ total }}円</th><th></th></tr>
+    </table>
+    <p><form method="post" action="/order"><button class="order">注文する</button></form></p>
+    {% else %}
+    <p>カートは空です。</p>
+    {% endif %}
+
+    <hr>
+    <h2>商品を追加（試し用）</h2>
+    <p>本番は A のメニュー画面の「カートに入れる」ボタンから入ります。ここはBが1人で試すための入口です。</p>
+    <form method="post" action="/cart/add">
+        <select name="id">
+            {% for code, item in menu.items() %}
+            <option value="{{ code }}">{{ code }} {{ item.name }} {{ item.price }}円</option>
+            {% endfor %}
+        </select>
+        <button>カートに入れる</button>
+    </form>
+</body>
+</html>
