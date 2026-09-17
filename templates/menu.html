@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>メニュー</title>
+    <style>
+        .menu-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .item-name {
+            width: 180px;
+        }
+
+        .item-price {
+            width: 70px;
+        }
+    </style>
 </head>
 <body>
     <h1>メニュー</h1>
@@ -10,7 +25,11 @@
     <ul>
         {% for item_code, item in menu.items() %}
             {% if item_code[0] == "D" %}
-            <li>{{ item.name }}：{{ item.price }}円</li>
+            <li class="menu-item">
+                <span class="item-name">{{ item.name }}</span>
+                <span class="item-price">{{ item.price }}円</span>
+                <button type="button">カートに入れる</button>
+            </li>
             {% endif %}
         {% endfor %}
     </ul>
@@ -19,7 +38,11 @@
     <ul>
         {% for item_code, item in menu.items() %}
             {% if item_code[0] == "F" %}
-            <li>{{ item.name }}：{{ item.price }}円</li>
+            <li class="menu-item">
+                <span class="item-name">{{ item.name }}</span>
+                <span class="item-price">{{ item.price }}円</span>
+                <button type="button">カートに入れる</button>
+            </li>
             {% endif %}
         {% endfor %}
     </ul>
@@ -28,7 +51,11 @@
     <ul>
         {% for item_code, item in menu.items() %}
             {% if item_code[0] == "S" %}
-            <li>{{ item.name }}：{{ item.price }}円</li>
+            <li class="menu-item">
+                <span class="item-name">{{ item.name }}</span>
+                <span class="item-price">{{ item.price }}円</span>
+                <button type="button">カートに入れる</button>
+            </li>
             {% endif %}
         {% endfor %}
     </ul>
