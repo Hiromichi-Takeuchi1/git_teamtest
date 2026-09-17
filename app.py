@@ -26,5 +26,11 @@ def show_menu():
     return render_template("menu.html", menu=menu)
 
 
+# ---- B(八木) カート・注文の窓口をつなぐ。ここは3行だけ ----
+app.secret_key = "sunaba-renshu"       # カートの中身を覚えるのに必要（練習用の合言葉）
+from routes_b import bp as bp_b        # noqa: E402  B の窓口は routes_b.py にある
+app.register_blueprint(bp_b)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
